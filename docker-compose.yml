@@ -1,0 +1,26 @@
+version: '3.0' # specify docker-compose version
+
+# Define the services (i.e. containers) to be run
+services:
+  frontend:
+    build: client/template-frontend # directory of the Dockerfile
+    ports:
+      - "4200:4200"
+
+  backend:
+    build: server/template-basic # directory of the Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database # link this service to the database service
+
+  database:
+    image: mongo:3.4.18-jessie # image to build container from
+    ports:
+      - "27017:27017"
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - /Users/david/Workspace/testMeanDocker/db:/data/db
