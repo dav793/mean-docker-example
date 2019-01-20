@@ -1,8 +1,11 @@
 # Example of docker containerization of a front-end, back-end and db.
 
+Branch 'master' uses 3 docker containers:
 * front-end is angular
 * back-end is node + express + mongoose
 * db is mongo
+
+Branch 'no-frontend' excludes de front-end container and instead builds and serves the front-end from the back-end.
 
 ## Set path to DB on host
 * in docker-compose.yml, replace ```<path to db on host>``` with your own path
