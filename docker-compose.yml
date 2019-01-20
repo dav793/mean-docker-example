@@ -8,11 +8,13 @@ services:
       - "4200:4200"
 
   backend:
-    build: server/template-basic # directory of the Dockerfile
+    build: server/template-mongodb # directory of the Dockerfile
     ports:
       - "8080:8080"
     depends_on:
       - database # link this service to the database service
+    environment:
+      DB_HOST: database   # name of the db container
 
   database:
     image: mongo:3.4.18-jessie # image to build container from
