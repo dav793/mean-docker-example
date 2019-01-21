@@ -1,0 +1,21 @@
+FROM node:8.15.0-jessie
+
+RUN mkdir -p /usr/server-src
+WORKDIR /usr/server-src
+COPY server/template-mongodb /usr/server-src
+
+RUN npm cache verify
+RUN npm install
+
+RUN mkdir -p /usr/client-src
+WORKDIR /usr/client-src
+COPY client/template-frontend /usr/client-src
+
+RUN npm cache verify
+RUN npm install
+RUN npm run build
+
+EXPOSE 8080
+EXPOSE 27017
+
+CMD ["npm", "run", "serve"]

@@ -2,22 +2,19 @@ version: '3.0' # specify docker-compose version
 
 # Define the services (i.e. containers) to be run
 services:
-  frontend:
-    build: client/template-frontend # directory of the Dockerfile
-    ports:
-      - "4200:4200"
-
   backend:
-    build: server/template-mongodb # directory of the Dockerfile
+    build:
+      context: .                    # directory of the Dockerfile
+      dockerfile: Dockerfile.development
     ports:
       - "8080:8080"
     depends_on:
-      - database # link this service to the database service
+      - database                    # link this service to the database service
     environment:
-      DB_HOST: database   # name of the db container
+      DB_HOST: database             # name of the db container
 
   database:
-    image: mongo:3.4.18-jessie # image to build container from
+    image: mongo:3.4.18-jessie      # image to build container from
     ports:
       - "27017:27017"
     restart: always

@@ -32,10 +32,17 @@ Branch 'no-frontend' excludes de front-end container and instead builds and serv
     docker run --name <container name> -p 4200:4200 <image tag>
 ```
 
-### back-end (will not connect to mongo container if run as individual container. use docker-compose)
+### stand-alone back-end (will not connect to mongo container if run as individual container. use docker-compose)
 
 ```bash
     cd server/template-mongodb
+    docker build -t <image tag> .
+    docker run --name <container name> -p 8080:8080 <image tag>
+```
+
+### back-end with integrated front-end (will not connect to mongo container if run as individual container. use docker-compose)
+
+```bash
     docker build -t <image tag> .
     docker run --name <container name> -p 8080:8080 <image tag>
 ```
